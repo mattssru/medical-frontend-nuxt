@@ -7,7 +7,7 @@
     <nav class="navbar navbar-expand-lg h-100">
       <div class="container">
         <a href="#" class="nav--logo d-block"
-          ><img src="../assets/images/logo.webp" alt=""
+          ><img src="~/assets/images/logo.webp" alt=""
         /></a>
         <div class="nav--menu">
           <ul class="nav--list d-flex">
