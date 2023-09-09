@@ -1,5 +1,9 @@
 <template>
-  <header class="header" id="mainHeader">
+  <header
+    class="header"
+    id="mainHeader"
+    :class="{ 'navbar-shrink': isNavbarShrink }"
+  >
     <nav class="navbar navbar-expand-lg h-100">
       <div class="container">
         <a href="#" class="nav--logo d-block"
@@ -31,14 +35,23 @@
           </ul>
         </div>
         <div class="display--hamburger align-items-center">
-          <button type="button" class="btn--hamburger p-0" @click="toggleHamburger">
+          <button
+            type="button"
+            class="btn--hamburger p-0"
+            :class="{ open: isMenuOpen }"
+            @click="toggleHamburger"
+          >
             <span></span>
             <span></span>
             <span></span>
           </button>
         </div>
-        <div class="menu--bg" @click="closeMenu"></div>
-        <div class="menu--responsive">
+        <div
+          class="menu--bg"
+          :class="{ 'menu--bg--active': isMenuOpen }"
+          @click="closeMenu"
+        ></div>
+        <div class="menu--responsive" :class="{ 'menu--open': isMenuOpen }">
           <div class="menu--contain" id="navMenu">
             <a href="" class="nav--link">Home</a>
             <a href="" class="nav--link">Category</a>
@@ -58,29 +71,38 @@
 </template>
 
 <script>
-import $ from 'jquery';
 export default {
+  data() {
+    return {
+      isNavbarShrink: false,
+      isMenuOpen: false,
+    };
+  },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
     handleScroll() {
-      if (window.pageYOffset > 0) {
-        document.getElementById("mainHeader").classList.add("navbar-shrink");
-      } else {
-        document.getElementById("mainHeader").classList.remove("navbar-shrink");
-      }
+      this.isNavbarShrink = window.scrollY > 0;
     },
     toggleHamburger() {
-      $('.btn--hamburger').toggleClass('open');
-      $('.menu--responsive').toggleClass('menu--open');
-      $('.menu--bg').toggleClass('menu--bg--active');
+      this.isMenuOpen = !this.isMenuOpen;
     },
     closeMenu() {
-      if ($('.btn--hamburger').hasClass('open')) {
-        this.toggleHamburger();
+      if (this.isMenuOpen) {
+        this.isMenuOpen = false;
       }
     },
+    // toggleHamburger() {
+    //   $('.btn--hamburger').toggleClass('open');
+    //   $('.menu--responsive').toggleClass('menu--open');
+    //   $('.menu--bg').toggleClass('menu--bg--active');
+    // },
+    // closeMenu() {
+    //   if ($('.btn--hamburger').hasClass('open')) {
+    //     this.toggleHamburger();
+    //   }
+    // },
   },
 };
 </script>
@@ -135,10 +157,10 @@ ul {
 .nav--link:hover::before {
   transform: rotateY(0);
 }
-.display--hamburger{
+.display--hamburger {
   display: none;
 }
-.btn--hamburger{
+.btn--hamburger {
   z-index: 1000;
   width: 29px;
   height: 23px;
@@ -148,10 +170,10 @@ ul {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
   cursor: pointer;
   border: none;
 }
@@ -168,10 +190,10 @@ ul {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .25s ease-in-out;
-  -moz-transition: .25s ease-in-out;
-  -o-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 .btn--hamburger span:nth-child(1) {
   top: 0px;
@@ -201,15 +223,15 @@ ul {
   -o-transform: rotate(-135deg);
   transform: rotate(-135deg);
 }
-.btn--hamburger img{
+.btn--hamburger img {
   width: 100%;
   height: 100%;
 }
-.btn--hamburger:focus{
+.btn--hamburger:focus {
   outline: none;
   box-shadow: none;
 }
-.menu--bg{
+.menu--bg {
   position: fixed;
   left: 0;
   top: 0;
@@ -223,12 +245,12 @@ ul {
   transition: opacity 0.4s ease-in-out;
   visibility: hidden;
 }
-.menu--bg--active{
+.menu--bg--active {
   opacity: 1;
   visibility: inherit;
   transition: opacity 0.3s ease-in-out;
 }
-.menu--responsive{
+.menu--responsive {
   position: fixed;
   left: auto;
   top: 0%;
@@ -249,11 +271,11 @@ ul {
   overflow-x: hidden;
   overflow-y: auto;
 }
-.menu--open{
+.menu--open {
   right: 0;
   transition: right 0.35s ease-in-out, left 0.5s ease-in-out;
 }
-.menu--contain{
+.menu--contain {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -275,26 +297,26 @@ ul {
   z-index: inherit;
 }
 @media screen and (max-width: 991px) {
-  .display--hamburger{
+  .display--hamburger {
     display: flex;
     order: 3;
   }
-  .btn--hamburger{
+  .btn--hamburger {
     display: flex;
   }
-  .nav--right{
+  .nav--right {
     margin-left: auto;
     margin-right: 20px;
   }
-  .nav--menu{
+  .nav--menu {
     display: none;
   }
-  .nav--link{
+  .nav--link {
     padding-top: 0.7em;
     padding-bottom: 0.7em;
     font-size: 1.3rem;
   }
-  .nav--link::before{
+  .nav--link::before {
     bottom: 10px;
     width: 100%;
   }
