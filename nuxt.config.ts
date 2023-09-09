@@ -1,8 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const { fileURLToPath } = require("url");
 export default defineNuxtConfig({
-  css: ["~/assets/css/styles.css"],
+  css: [
+    '~/assets/css/styles.css',
+  ],
+
   components: ["~/components/**"],
+  plugins: [
+    { 
+      src: '~/plugins/jquery.js', mode: 'client',
+    },
+  ],
   dir: {
     assets: "~/assets/**",
   },
@@ -11,14 +19,6 @@ export default defineNuxtConfig({
       title: "Medical",
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
-      script: ["~/assets/js/main.js"],
-      // script: [
-      //   {
-      //     type: 'module',
-      //     src: "../assets/js/main.js",
-      //     crossorigin: "",
-      //   }
-      // ],
       link: [
         {
           rel: "stylesheet",
@@ -30,6 +30,7 @@ export default defineNuxtConfig({
         //   href: "/favicon.png",
         // },
       ],
+      
     },
   },
   devtools: { enabled: true },
