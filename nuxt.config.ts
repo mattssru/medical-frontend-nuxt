@@ -24,11 +24,11 @@ export default defineNuxtConfig({
           rel: "stylesheet",
           href: "https://unicons.iconscout.com/release/v4.0.8/css/line.css",
         },
-        {
-          rel: "icon",
-          type: "image/x-icon",
-          href: "/favicon.png",
-        },
+        // {
+        //   rel: "icon",
+        //   type: "image/x-icon",
+        //   href: "/favicon.png",
+        // },
       ],
     },
   },
